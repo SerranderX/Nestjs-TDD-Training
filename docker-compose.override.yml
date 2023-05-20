@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  nest-tdd:
+    image: nest-tdd
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #environment:
+      #MONGO_URL: "mongodb://db:27017/test"
+    #depends_on:
+      #- db
+    ports:
+      - "3000-3005:3000"
+    volumes:
+          - type: bind
+            source: G:/Progra/Testing Drive Development/TDD-NestJS/nest-tdd # Sirve tambien el '.' al igual que en el context
+            target: /usr/src
+          - /usr/src/node_modules # ignorar el bind de este directorio
+    command: npm run start:dev
+  #db:
+    #image: mongo
+    #volumes:
+          #- type: bind
+          #  source: G:/Progra/Docker/db
+          #  target: /data/db
