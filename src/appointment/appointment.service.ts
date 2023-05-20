@@ -10,9 +10,21 @@ export interface AppointmentInput {
 @Injectable()
 export class AppointmentService {
   public scheduleAppointment(appointmentData: AppointmentInput): Appointment {
-    if (appointmentData?.endTime < appointmentData?.startTime) {
+    if (appointmentData?.endTime < appointmentData?.startTime)
       throw new Error("Appointment's endTime should be after startTime");
-    }
+
+    if (
+      appointmentData?.endTime == appointmentData?.startTime ||
+      Math.round(
+        Math.abs(
+          appointmentData?.startTime.getTime() -
+            appointmentData?.endTime.getTime(),
+        ) / 60000,
+      ) < 30
+    )
+      throw new Error(
+        "Appointment's endTime should be after startTime and a minimun of thirdty minutes must elapse",
+      );
 
     return {
       ...appointmentData,

@@ -52,4 +52,32 @@ describe('AppointmentService', () => {
       }),
     ).toThrowError("Appointment's endTime should be after startTime");
   });
+
+  it('should throw an error when end time is equal or less than thirdty minutes to start time', () => {
+    let startTime = new Date('2022-01-01T14:00:00Z');
+    let endTime = startTime;
+
+    expect(() =>
+      service.scheduleAppointment({
+        patientId: 1,
+        startTime,
+        endTime,
+      }),
+    ).toThrowError(
+      "Appointment's endTime should be after startTime and a minimun of thirdty minutes must elapse",
+    );
+
+    startTime = new Date('2022-01-01T14:00:00Z');
+    endTime = new Date('2022-01-01T14:29:00Z');
+
+    expect(() =>
+      service.scheduleAppointment({
+        patientId: 1,
+        startTime,
+        endTime,
+      }),
+    ).toThrowError(
+      "Appointment's endTime should be after startTime and a minimun of thirdty minutes must elapse",
+    );
+  });
 });
