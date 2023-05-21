@@ -19,7 +19,8 @@
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
     "paths": {
-      "@appointment/*": ["src/appointment/*"]
+      "@appointment/*": ["src/appointment/*"],
+      "@patient/*": ["src/patient/*"],
     }
   }
 }
