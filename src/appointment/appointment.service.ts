@@ -30,16 +30,26 @@ export class AppointmentService {
     };
   }
 
-  private endInTheSameDayAndMonth(appointmentData: AppointmentInput) {
-    return (
+  private endInTheSameDayAndMonth(appointmentData: AppointmentInput): boolean {
+    const differentDays =
       appointmentData.endTime.getUTCDate() !==
-        appointmentData.startTime.getUTCDate() ||
+      appointmentData.startTime.getUTCDate();
+
+    const differentMonths =
       appointmentData.endTime.getUTCMonth() !==
-        appointmentData.startTime.getUTCMonth()
-    );
+      appointmentData.startTime.getUTCMonth();
+
+    // Now we also check for years
+    const differentYears =
+      appointmentData.endTime.getUTCFullYear() !==
+      appointmentData.startTime.getUTCFullYear();
+
+    return differentDays || differentMonths || differentYears;
   }
 
-  private endThirdtyMinutesBeforeStart(appointmentData: AppointmentInput) {
+  private endThirdtyMinutesBeforeStart(
+    appointmentData: AppointmentInput,
+  ): boolean {
     return (
       appointmentData?.endTime == appointmentData?.startTime ||
       Math.round(
