@@ -80,4 +80,34 @@ describe('AppointmentService', () => {
       "Appointment's endTime should be after startTime and a minimun of thirdty minutes must elapse",
     );
   });
+
+  it('should throw an error when end time is in the next day', () => {
+    const startTime = new Date('2022-01-01T14:00:00Z');
+    const endTime = new Date('2022-01-02T00:00:00Z');
+
+    expect(() =>
+      service.scheduleAppointment({
+        patientId: 1,
+        startTime,
+        endTime,
+      }),
+    ).toThrowError(
+      "Appointment's endTime should be in the same day as start time's",
+    );
+  });
+
+  it('should throw an error when end time is in same day and hour of next month', () => {
+    const startTime = new Date('2022-01-01T14:00:00Z');
+    const endTime = new Date('2022-02-01T14:00:00Z');
+
+    expect(() =>
+      service.scheduleAppointment({
+        patientId: 1,
+        startTime,
+        endTime,
+      }),
+    ).toThrowError(
+      "Appointment's endTime should be in the same day as start time's",
+    );
+  });
 });

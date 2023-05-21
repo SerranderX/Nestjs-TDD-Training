@@ -26,6 +26,17 @@ export class AppointmentService {
         "Appointment's endTime should be after startTime and a minimun of thirdty minutes must elapse",
       );
 
+    if (
+      appointmentData.endTime.getUTCDate() !==
+        appointmentData.startTime.getUTCDate() ||
+      appointmentData.endTime.getUTCMonth() !==
+        appointmentData.startTime.getUTCMonth()
+    ) {
+      throw new Error(
+        "Appointment's endTime should be in the same day as start time's",
+      );
+    }
+
     return {
       ...appointmentData,
       confirmed: false,
