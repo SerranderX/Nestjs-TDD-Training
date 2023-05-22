@@ -20,7 +20,7 @@
     "resolveJsonModule": true,
     "paths": {
       "@appointment/*": ["src/appointment/*"],
-      "@patient/*": ["src/patient/*"],
+      "@patient/*": ["src/patient/*"]
     }
   }
 }
