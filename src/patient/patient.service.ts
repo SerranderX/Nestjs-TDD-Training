@@ -9,9 +9,12 @@ export interface PatientInput {
 export class PatientService {
   private readonly patients: Patient[] = [];
 
+  private nextId = 1;
+
   public async register(patientInput: PatientInput): Promise<Patient> {
     const newPatient = {
-      id: 1,
+      // now we use this new counter and increase it in every call
+      id: this.nextId++,
       name: patientInput.name,
     };
 
