@@ -11,9 +11,6 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# [TEST] Removing folder tracking in git
-/test
-
 # OS
 .DS_Store
 
